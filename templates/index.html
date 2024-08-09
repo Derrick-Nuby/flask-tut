@@ -1,26 +1,33 @@
 {% extends 'base.html'%} {% block head %}
-<title>Task Smask</title>
+<title>Flask ToDo App</title>
 {% endblock %} {% block body%}
 <div class="content">
-  <h1>Task Smash 2.0</h1>
+  <h1>Flask ToDo App</h1>
 
   {% if tasks | length < 1%}
-  <h3>There are no tasks... Create one here!</h3>
+  <h3>Looks like you have no task, could you please create a task??</h3>
   {% else %}
   <table>
     <tr>
       <th>Task</th>
       <th>Added</th>
       <th>Actions</th>
+      <th>Mark As</th>
     </tr>
     {% for task in tasks %}
     <tr>
       <td>{{task.content}}</td>
       <td>{{task.created.strftime("%Y-%m-%d")}}</td>
-      <td>
+      <td class="buttons">
         <a href="/delete/{{task.id}}">Delete</a>
         <br />
         <a href="/edit/{{task.id}}">Edit</a>
+      </td>
+      <td class="markas">
+        <div class="checkbox-container">
+          <input type="checkbox" name="" id="task-{{task.id}}" />
+          <label for="task-{{task.id}}">Completed</label>
+        </div>
       </td>
     </tr>
     {% endfor %}

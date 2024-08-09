@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block head %}
+<title>Create Account</title>
+{% endblock %} {% block body %}
+<div class="content">
+  <h1>Create Account</h1>
+  <form action="/register" method="POST">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required />
+    </div>
+    <div>
+      <input type="submit" value="Create Account" />
+    </div>
+  </form>
+  <p>Already have an account? <a href="/login">Login</a></p>
+</div>
+{% endblock %}
