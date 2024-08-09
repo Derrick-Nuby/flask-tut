@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from . import db
 from .models import MyTask
-from .controllers import task_controller
+from .controllers import task_controller,user_controller
 
 
 def init_routes(app):
@@ -26,3 +26,13 @@ def init_routes(app):
     @app.route("/tasks/<int:id>", methods=["DELETE"])
     def delete_task(id: int):
         return task_controller.delete_task(id)
+    
+    @app.route("/login", methods=["POST"])
+    def login_user():
+        data = request.get_json()
+        return user_controller.login_user(data)
+
+    @app.route("/register", methods=["POST"])
+    def register_user():
+        data = request.get_json()
+        return user_controller.register_user(data)
