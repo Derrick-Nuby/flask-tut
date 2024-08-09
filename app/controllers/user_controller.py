@@ -1,5 +1,6 @@
 from flask import jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.utils.jwt_helper import encode_auth_token
 from ..models import User, db
 
 def register_user(data):
@@ -37,4 +38,6 @@ def login_user(data):
     if not user or not check_password_hash(user.password, password):
         return jsonify({"message": "Invalid email or password"}), 401
 
-    return jsonify({"message": "Login successful"}), 200
+    token = encode_auth_token(user.id, user.email)
+    
+    return jsonify({"message": "Login successful", "token": token}), 200
